@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: vote-app-result
+  name: vote-app-result
+  namespace: l-prod
+spec:
+  type: ClusterIP
+  ports:
+  - name: "result-service"
+    port: 5001
+    targetPort: 80
+    nodePort: 31001
+  selector:
+    app: vote-app-result

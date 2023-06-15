@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: vote-app-vote
+  name: vote-app-vote
+  namespace: l-prod
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vote-app-vote
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: vote-app-vote
+    spec:
+      containers:
+      - image: dockersamples/examplevotingapp_vote
+        name: vote
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "100m"
+          requests:
+            memory: "50Mi"
+            cpu: "50m"
+        ports:
+        - containerPort: 80
+          name: vote-app-vote

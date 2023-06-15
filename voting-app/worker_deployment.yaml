@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  labels:
+    app: vote-app-worker
+  name: vote-app-worker
+  namespace: l-prod
+spec:
+  selector:
+    matchLabels:
+      app: vote-app-worker
+  template:
+    metadata:
+      labels:
+        app: vote-app-worker
+    spec:
+      containers:
+      - image: dockersamples/examplevotingapp_worker
+        name: worker
+        resources:
+          limits:
+            memory: "100Mi"
+            cpu: "100m"
+          requests:
+            memory: "70Mi"
+            cpu: "70m"
