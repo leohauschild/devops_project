@@ -4,7 +4,7 @@ metadata:
   labels:
     app: vote-app-worker
   name: vote-app-worker
-  namespace: l-prod
+  namespace: voting-app
 spec:
   selector:
     matchLabels:

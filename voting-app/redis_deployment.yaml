@@ -4,7 +4,7 @@ metadata:
   name: vote-app-redis
   labels:
     app: vote-app-redis
-  namespace: l-prod
+  namespace: voting-app
 spec:
   replicas: 1
   selector:

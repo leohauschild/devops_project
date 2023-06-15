@@ -5,7 +5,7 @@ metadata:
   name: redis
   labels:
     app: vote-app-redis
-  namespace: l-prod
+  namespace: voting-app
 spec:
   type: ClusterIP
   selector:

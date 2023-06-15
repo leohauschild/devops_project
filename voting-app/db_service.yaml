@@ -5,7 +5,7 @@ metadata:
   labels:
     app: vote-app-db
   name: db
-  namespace: l-prod
+  namespace: voting-app
 spec:
   type: ClusterIP
   ports:

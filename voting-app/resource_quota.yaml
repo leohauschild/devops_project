@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ResourceQuota
 metadata:
-  name: resource-quota-l-prod
+  name: resource-quota-voting-app
 spec:
   hard:
     requests.cpu: "1"

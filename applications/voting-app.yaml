@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  name: voting-app
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/leohauschild/devops_project.git
+    targetRevision: HEAD
+    path: voting-app
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: voting-app
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
