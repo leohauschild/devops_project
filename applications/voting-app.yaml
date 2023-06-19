@@ -10,7 +10,7 @@ spec:
   source:
     repoURL: https://github.com/leohauschild/devops_project.git
     targetRevision: HEAD
-    path: voting-app
+    path: voting-app-yaml-files
   destination:
     server: https://kubernetes.default.svc
     namespace: voting-app
