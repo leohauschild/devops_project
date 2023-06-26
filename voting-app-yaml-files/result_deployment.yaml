@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
       - name: result
-        image: leohauschild/vote-app-result:v1.2.0
+        image: leohauschild/vote-app-result:v1.2.1
         resources:
           limits:
             memory: "100Mi"
