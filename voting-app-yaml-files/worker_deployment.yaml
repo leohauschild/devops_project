@@ -15,7 +15,7 @@ spec:
         app: vote-app-worker
     spec:
       containers:
-      - image: leohauschild/vote-app-worker:v1.2.0
+      - image: leohauschild/vote-app-worker:v1.2.1
         name: worker
         resources:
           limits:
