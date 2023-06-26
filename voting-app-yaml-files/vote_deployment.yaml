@@ -21,7 +21,7 @@ spec:
         app: vote-app-vote
     spec:
       containers:
-      - image: leohauschild/vote-app-vote:v1.1.2
+      - image: leohauschild/vote-app-vote:v1.2.0
         name: vote
         resources:
           limits:
