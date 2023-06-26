@@ -15,7 +15,7 @@ spec:
         app: vote-app-worker
     spec:
       containers:
-      - image: dockersamples/examplevotingapp_worker
+      - image: leohauschild/vote-app-worker:v1.2.0
         name: worker
         resources:
           limits:
