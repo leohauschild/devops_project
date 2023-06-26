@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
       - name: result
-        image: dockersamples/examplevotingapp_result
+        image: leohauschild/vote-app-result:v1.2.0
         resources:
           limits:
             memory: "100Mi"
