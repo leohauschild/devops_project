@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "vote-app.fullname" . }}-{{ .Values.worker.appName }}
+  labels:
+    app: {{ include "vote-app.fullname" . }}-{{ .Values.worker.appName }}
+  {{- include "vote-app.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.worker.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      app: {{ include "vote-app.fullname" . }}-{{ .Values.worker.appName }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "vote-app.fullname" . }}-{{ .Values.worker.appName }}
+    spec:
+      {{- with .Values.worker.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      containers:
+        - name: {{ include "vote-app.fullname" . }}-{{ .Values.worker.appName }}
+          image: {{ .Values.worker.image.repository }}:{{ .Values.worker.image.tag }}
+          imagePullPolicy: {{ .Values.worker.image.pullPolicy }}
+          resources:
+          {{- toYaml .Values.worker.resources | nindent 12 }}

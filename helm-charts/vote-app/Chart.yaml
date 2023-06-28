@@ -1,0 +1,19 @@
+apiVersion: v2
+name: vote-app
+description: A Helm chart for Kubernetes
+type: application
+maintainers:
+  - name: leohauschild
+    email: leohauschild@outlook.com
+version: 0.1.0
+appVersion: "0.1.0"
+
+dependencies:
+  - name: postgresql
+    version: "12.*"
+    repository: oci://registry-1.docker.io/bitnamicharts
+    condition: postgresql.enabled
+  - name: redis
+    version: "17.*"
+    repository: oci://registry-1.docker.io/bitnamicharts
+    condition: redis.enaled

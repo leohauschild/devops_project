@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "vote-app.fullname" . }}-{{ .Values.result.appName }}
+  labels:
+    app: {{ include "vote-app.fullname" . }}-{{ .Values.result.appName }}
+spec:
+  type: {{ .Values.result.service.type }}
+  ports:
+    - port: {{ .Values.result.service.port }}
+      targetPort: {{ .Values.result.service.targetPort }}
+      name: {{ .Values.result.service.name }}
+  selector:
+    app: {{ include "vote-app.fullname" . }}-{{ .Values.result.appName }}

@@ -1,0 +1,28 @@
+{{- if .Values.result.autoscaling.enabled }}
+apiVersion: autoscaling/v2beta2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: {{ include "vote-app.fullname" . }}-{{ .Values.result.appName }}
+  labels:
+    app: {{ include "vote-app.fullname" . }}-{{ .Values.result.appName }}
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: {{ include "vote-app.fullname" . }}-{{ .Values.result.appName }}
+  minReplicas: {{ .Values.result.autoscaling.minReplicas }}
+  maxReplicas: {{ .Values.result.autoscaling.maxReplicas }}
+  metrics:
+    {{- if .Values.result.autoscaling.targetCPUUtilizationPercentage }}
+    - type: Resource
+      resource:
+        name: cpu
+        targetAverageUtilization: {{ .Values.result.autoscaling.targetCPUUtilizationPercentage }}
+    {{- end }}
+    {{- if .Values.result.autoscaling.targetMemoryUtilizationPercentage }}
+    - type: Resource
+      resource:
+        name: memory
+        targetAverageUtilization: {{ .Values.result.autoscaling.targetMemoryUtilizationPercentage }}
+    {{- end }}
+{{- end }}

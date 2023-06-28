@@ -1,0 +1,124 @@
+nameOverride: "vote-app"
+fullnameOverride: "vote-app"
+
+postgresql:
+  enabled: true
+
+redis:
+  enabled: true
+  architecture: standalone
+
+
+### Vote configuration ###  
+vote:
+  appName: vote
+
+  replicaCount: 1
+
+  image:
+    repository: leohauschild/vote-app-vote
+    pullPolicy: Always
+    tag: "latest"
+  imagePullSecrets: ""
+
+  containerPort: 80
+  portName: vote-port
+
+  resources:
+    requests:
+      memory: 50Mi
+      cpu: 50m
+    limits:
+      memory: 200Mi
+      cpu: 200m
+
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}
+
+  autoscaling:
+    enabled: false
+    minReplicas: 1
+    maxReplicas: 3
+    targetCPUUtilizationPercentage: 80
+    # targetMemoryUtilizationPercentage: 80
+
+  service:
+    type: NodePort
+    port: 5000
+    targetPort: 80
+    nodePort: 31002
+    name: vote-app-vote-service
+
+
+### Result configuration ###
+result:
+  appName: result
+
+  replicaCount: 1
+
+  image:
+    repository: leohauschild/vote-app-result
+    pullPolicy: Always
+    tag: "latest"
+  imagePullSecrets: ""
+
+  containerPort: 80
+  portName: vote
+
+  resources:
+    requests:
+      memory: 50Mi
+      cpu: 50m
+    limits:
+      memory: 200Mi
+      cpu: 200m
+
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}
+
+  autoscaling:
+    enabled: false
+    minReplicas: 1
+    maxReplicas: 3
+    targetCPUUtilizationPercentage: 80
+    # targetMemoryUtilizationPercentage: 80
+
+  service:
+    type: NodePort
+    port: 5001
+    targetPort: 80
+    nodePort: 31001
+    name: vote-app-result-service
+
+### worker configuration ###
+worker:
+  appName: worker
+
+  replicaCount: 1
+
+  image:
+    repository: leohauschild/vote-app-worker
+    pullPolicy: Always
+    tag: "latest"
+  imagePullSecrets: ""
+
+  resources:
+    requests:
+      memory: 70Mi
+      cpu: 70m
+    limits:
+      memory: 200Mi
+      cpu: 200m
+
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}
+
+  autoscaling:
+    enabled: false
+    minReplicas: 1
+    maxReplicas: 3
+    targetCPUUtilizationPercentage: 80
+    # targetMemoryUtilizationPercentage: 80
