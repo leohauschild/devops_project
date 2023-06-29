@@ -1,0 +1,9 @@
+controller:
+  replicaCount: 1
+  ingressClassResource:
+    name: nginx-default
+    default: true
+
+  service:
+    externalTrafficPolicy: Cluster
+    loadBalancerIP: 172.18.0.4
