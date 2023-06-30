@@ -1,22 +1,22 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: prometheus
+  name: prometheus-stack
   namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
-  source:
-    repoURL: https://prometheus-community.github.io/helm-charts
+  sources:
+  - repoURL: https://prometheus-community.github.io/helm-charts
     targetRevision: 47.1.0
     chart: kube-prometheus-stack
     helm:
       valueFiles:
-        - values.yaml
-      externalValueFiles:
-        - repoURL: https://github.com/leohauschild/devops_project.git
-          targetRevision: main
-          valueFiles:
-            - gitops/observability/prometheus-stack/values.yaml
+        - $values/gitops/observability/prometheus-stack/values.yaml
+  - repoURL: https://github.com/leohauschild/devops_project.git
+    targetRevision: main
+    ref: values
   destination:
     server: https://kubernetes.default.svc
     namespace: observability
