@@ -3,20 +3,20 @@ kind: Application
 metadata:
   name: nginx
   namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
-  source:
-    repoURL: https://kubernetes.github.io/ingress-nginx
+  sources:
+  - repoURL: https://kubernetes.github.io/ingress-nginx
     targetRevision: 4.6.0
     chart: ingress-nginx
     helm:
       valueFiles:
-        - values.yaml
-      externalValueFiles:
-        - repoURL: https://github.com/leohauschild/devops_project.git
-          targetRevision: main
-          valueFiles:
-            - gitops/ingress-nginx/values.yaml
+        - $values/gitops/ingress-nginx/values.yaml
+  - repoURL: https://github.com/leohauschild/devops_project.git
+    targetRevision: main
+    ref: values
   destination:
     server: https://kubernetes.default.svc
     namespace: nginx

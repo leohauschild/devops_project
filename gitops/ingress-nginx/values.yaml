@@ -6,4 +6,4 @@ controller:
 
   service:
     externalTrafficPolicy: Cluster
-    loadBalancerIP: 172.18.0.4
+    loadBalancerIP: 172.18.0.3
