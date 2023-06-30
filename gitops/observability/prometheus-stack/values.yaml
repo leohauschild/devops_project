@@ -2,4 +2,4 @@ fullnameOverride: "prom-stack"
 
 alertmanager:
   alertmanagerSpec:
-    replicas: 3
+    replicas: 2
