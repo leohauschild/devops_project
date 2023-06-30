@@ -5,7 +5,7 @@ alertmanager:
   
   config:
     global:
-    resolve_timeout: 5m
+      resolve_timeout: 5m
 
     route:
       group_by: ['namespace']
