@@ -1,3 +1,5 @@
+grafana:
+  enabled: false
 
 alertmanager:
   alertmanagerSpec:
