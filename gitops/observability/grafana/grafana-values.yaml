@@ -1,3 +1,5 @@
+replicas: 2
+
 admin:
   existingSecret: "grafana-pass"
   userKey: admin-user
@@ -12,3 +14,21 @@ datasources:
       url: http://prometheus-stack-kube-prom-prometheus.observability:9090
       access: proxy
       isDefault: true
+
+persistence:
+  type: pvc
+  enabled: true
+  storageClassName: default
+  accessModes:
+    - ReadWriteOnce
+  size: 2Gi
+  # annotations: {}
+  finalizers:
+    - kubernetes.io/pvc-protection
+  # selectorLabels: {}
+  ## Sub-directory of the PV to mount. Can be templated.
+  # subPath: ""
+  ## Name of an existing PVC. Can be templated.
+  # existingClaim:
+  ## Extra labels to apply to a PVC.
+  extraPvcLabels: {}
