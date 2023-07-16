@@ -1,0 +1,31 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: grafana-dashboard
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  sources:
+  - repoURL: https://grafana.github.io/helm-charts
+    targetRevision: 6.58.4
+    chart: grafana
+    helm:
+      valueFiles:
+        - $values/gitops/observability/grafana/grafana-values.yaml
+  - repoURL: https://github.com/leohauschild/devops_project.git
+    targetRevision: main
+    ref: values
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: observability
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+      allowEmpty: false
+    syncOptions:
+    - ServerSideApply=true
+    - CreateNamespace=true
+
